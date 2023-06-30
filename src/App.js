@@ -41,6 +41,18 @@ function Nav({ t, changeLanguage }) {
     );
 }
 
+function Footer({ t }) {
+    return (
+        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 border-top fixed-bottom bg-body-tertiary">
+            <p className="col-md-4 mb-1 ms-2 text-body-secondary">{t("orgName")}</p>
+                
+            <a href="/" className="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none me-3">
+                <img src="favicon.ico" alt="Logo" width="30" height="24" className="align-text-top" />
+            </a>
+        </footer>
+    );
+}
+
 export default function App() {
     const { t, i18n } = useTranslation();
 
@@ -54,6 +66,7 @@ export default function App() {
     return (
         <>
             <Nav t={t} changeLanguage={changeLanguage} />
+            <Footer t={t} />
         </>
     );
 }
