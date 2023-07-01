@@ -44,12 +44,66 @@ function Nav({ t, changeLanguage }) {
 
 function NumberForm({ t, setAppState }) {
     return (
-        <form id="numberForm" className="d-flex align-items-center position-absolute top-50 start-50 translate-middle w-75 h-50 bg-body-tertiary rounded-5">
-            <button type="button" className="position-absolute top-0 end-0 m-3 btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title={t("numberForm.settings")}><i className="bi bi-gear"></i></button>
+        <form id="numberForm" className="d-flex align-items-center position-absolute top-50 start-50 translate-middle w-75 h-50 bg-body-tertiary rounded-5 p-2">
+
+            <button type="button" className="position-absolute top-0 end-0 m-3 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#numeralSystemsModal">
+                <i className="bi bi-gear" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title={t("numberForm.settings")}></i>
+            </button>
+
             <h2 className="text-center mt-3">{t("numberForm.intro")}</h2>
             <input type="number" className="form-control"></input>
             <button type="submit" className="btn btn-success fixed-bottom mb-5" id="startButton">{t("numberForm.start")}</button>
         </form>
+    );
+}
+
+function NumeralSystemsModal({ t, numeralSystems, setNumeralSystems }) {
+    return (
+        <div className="modal fade" id="numeralSystemsModal" tabIndex="-1" aria-labelledby="numeralSystemsModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered ">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="numeralSystemsModalLabel">{t("numeralSystemsModal.title")}</h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <h2>{t("numeralSystemsModal.ancient")}</h2>
+                        <hr />
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="maya" checked={numeralSystems.maya} onChange={() => setNumeralSystems({...numeralSystems, maya: !numeralSystems.maya})}/>
+                            <label className="form-check-label" htmlFor="maya">{t("numeralSystemsModal.maya")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="babylonian" checked={numeralSystems.babylonian} onChange={() => setNumeralSystems({...numeralSystems, babylonian: !numeralSystems.babylonian})}/>
+                            <label className="form-check-label" htmlFor="babylonian">{t("numeralSystemsModal.numeralSystemsModalbabyloanian")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="greek" checked={numeralSystems.greek} onChange={() => setNumeralSystems({...numeralSystems, greek: !numeralSystems.greek})}/>
+                            <label className="form-check-label" htmlFor="greek">{t("numeralSystemsModal.greek")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="roman" checked={numeralSystems.roman} onChange={() => setNumeralSystems({...numeralSystems, roman: !numeralSystems.roman})}/>
+                            <label className="form-check-label" htmlFor="roman">{t("numeralSystemsModal.roman")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="inca" checked={numeralSystems.inca} onChange={() => setNumeralSystems({...numeralSystems, inca: !numeralSystems.inca})}/>
+                            <label className="form-check-label" htmlFor="inca">{t("numeralSystemsModal.inca")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="chinese" checked={numeralSystems.chinese} onChange={() => setNumeralSystems({...numeralSystems, chinese: !numeralSystems.chinese})}/>
+                            <label className="form-check-label" htmlFor="chinese">{t("numeralSystemsModal.chinese")}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="egyptian" checked={numeralSystems.egyptian} onChange={() => setNumeralSystems({...numeralSystems, egyptian: !numeralSystems.egyptian})}/>
+                            <label className="form-check-label" htmlFor="egyptian">{t("numeralSystemsModal.egyptian")}</label>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">{t("close")}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
@@ -67,6 +121,15 @@ function Footer({ t }) {
 
 export default function App() {
     const { t, i18n } = useTranslation();
+    const [numeralSystems, setNumeralSystems] = useState({
+        maya: true,
+        babylonian: true,
+        greek: true,
+        roman: true,
+        inca: true,
+        chinese: true,
+        egyptian: true
+    });
 
     useScript("js/bootstrap_helper.js");
 
@@ -81,6 +144,7 @@ export default function App() {
         <>
             <Nav t={t} changeLanguage={changeLanguage} />
             <NumberForm t={t} />
+            <NumeralSystemsModal t={t} numeralSystems={numeralSystems} setNumeralSystems={setNumeralSystems} />
             <Footer t={t} />
         </>
     );
