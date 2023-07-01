@@ -75,7 +75,7 @@ function NumeralSystemsModal({ t, numeralSystems, setNumeralSystems }) {
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="babylonian" checked={numeralSystems.babylonian} onChange={() => setNumeralSystems({...numeralSystems, babylonian: !numeralSystems.babylonian})}/>
-                            <label className="form-check-label" htmlFor="babylonian">{t("numeralSystemsModal.numeralSystemsModalbabyloanian")}</label>
+                            <label className="form-check-label" htmlFor="babylonian">{t("numeralSystemsModal.babylonian")}</label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="greek" checked={numeralSystems.greek} onChange={() => setNumeralSystems({...numeralSystems, greek: !numeralSystems.greek})}/>
