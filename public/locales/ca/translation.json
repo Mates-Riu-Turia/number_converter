@@ -6,5 +6,17 @@
         "settings": "Configure en què sistemes de numeració vol el resultat",
         "intro": "Introduïsca el nombre a ser traduït",
         "start": "Traduir el nombre"
-    }
+    },
+    "numeralSystemsModal": {
+        "title": "Elegeix els sistemes de numeració de destí",
+        "ancient": "Sistemes de numeració antics",
+        "maya": "Maia",
+        "babylonian": "Babilònic",
+        "greek": "Grec",
+        "roman": "Romà",
+        "inca": "Inca",
+        "chinese": "Xinés",
+        "egyptian": "Egipci"
+    },
+    "close": "Tancar"
 }
