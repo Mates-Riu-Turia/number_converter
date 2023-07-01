@@ -1,5 +1,10 @@
 {
     "title": "Convertidor de números",
     "chooseLang": "Elige un idioma",
-    "orgName": "© 2023 Dpto. de Matemáticas del IES Riu Túria"
+    "orgName": "© 2023 Dpto. de Matemáticas del IES Riu Túria",
+    "numberForm": {
+        "settings": "Configure en que sistemas de numeración quiere el resultado",
+        "intro": "Introduzca el número a ser traducido",
+        "start": "Traducir el número"
+    }
 }
