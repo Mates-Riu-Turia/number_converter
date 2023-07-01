@@ -1,0 +1,20 @@
+{
+    "name": "Number Converter",
+    "short_name": "Number Converter",
+    "start_url": ".",
+    "display": "standalone",
+    "description": " Convert arabic numbers to a different numeral system.",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "30x24",
+        "type": "image/x-icon"
+      }
+    ],
+    "related_applications": [
+      {
+        "platform": "not-now",
+        "url": "not-now"
+      }
+    ]
+  }
