@@ -34,11 +34,11 @@ function Nav({ t, changeLanguage }) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div className="dropdown">
+                    <div className="dropdown m-1">
                         <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
                         </button>
-                        <ul className="dropdown-menu dropdown-menu-end">
+                        <ul className="dropdown-menu">
                             <li><button className="dropdown-item" type="button" onClick={changeLanguageCa}>Valencià/Català</button></li>
                             <li><button className="dropdown-item" type="button" onClick={changeLanguageEs}>Castellano</button></li>
                             <li><button className="dropdown-item" type="button" onClick={changeLanguageEn}>English</button></li>
@@ -55,11 +55,11 @@ function ThemeSelector({ t }) {
     const [getTheme, setTheme] = useTheme();
 
     return (
-        <div className="dropdown">
+        <div className="dropdown m-1">
             <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className={getTheme()[0]}></i> <span id="currentTheme">{t(getTheme()[1])}</span>
             </button>
-            <ul className="dropdown-menu dropdown-menu-end"> 
+            <ul className="dropdown-menu"> 
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("light")}><i className="bi bi-sun-fill">{t("themeSelector.light")}</i></button></li>
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("dark")}><i className="bi bi-moon-stars-fill">{t("themeSelector.dark")}</i></button></li>
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("auto")}><i className="bi bi-circle-half">{t("themeSelector.auto")}</i></button></li>

@@ -9,8 +9,12 @@
 
 @media (max-height: 576px) {
     #numberForm {
-        height: 70% !important;
-        transform: translate(-50%, -52%) !important;
+        z-index: -1;
+        height: 63% !important;
+        transform: translate(-50%, -55%) !important;
+    }
+    #startButton {
+        margin-bottom: 1rem !important;
     }
 }
 
