@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useScript from "./hooks/useScript";
+import useNumeralSystems from "./hooks/useNumeralSystems";
 
 function Nav({ t, changeLanguage }) {
     const [state, setState] = useState(" " + t("chooseLang"));
@@ -121,15 +122,8 @@ function Footer({ t }) {
 
 export default function App() {
     const { t, i18n } = useTranslation();
-    const [numeralSystems, setNumeralSystems] = useState({
-        maya: true,
-        babylonian: true,
-        greek: true,
-        roman: true,
-        inca: true,
-        chinese: true,
-        egyptian: true
-    });
+
+     const [numeralSystems, setNumeralSystems] = useNumeralSystems();
 
     useScript("js/bootstrap_helper.js");
 
