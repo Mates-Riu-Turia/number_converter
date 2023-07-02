@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function loadUserPreferences() {
-    let result = {
+    const defaultRes = {
         maya: true,
         babylonian: true,
         greek: true,
@@ -11,29 +11,21 @@ function loadUserPreferences() {
         egyptian: true
     };
 
-    const cookieArr = document.cookie.split(";");
-    
-    for (const cookieIndex in cookieArr) {
-        const cookie = cookieArr[cookieIndex].split("=");
+    const storedSystems = localStorage.getItem("numeralSystems");
 
-        if (cookie[0].trim() == "numeralSystems") {
-            result = JSON.parse(decodeURIComponent(cookie[1]));
-        }
-    }
-
-    return result;
+    return storedSystems ? JSON.parse(storedSystems) : defaultRes;
 }
 
 
 const useNumeralSystems = () => {
     const [numeralSystems, setNumeralSystems] = useState(loadUserPreferences());
 
-    const setNumeralSystemsCookie = (sys) => {
+    const setStoredNumeralSystems = (sys) => {
         setNumeralSystems(sys);
-        document.cookie = "numeralSystems=" + JSON.stringify(sys) + "; SameSite=Lax";
+        localStorage.setItem("numeralSystems", JSON.stringify(sys));
     }
 
-    return [numeralSystems, setNumeralSystemsCookie];
+    return [numeralSystems, setStoredNumeralSystems];
 };
 
 export default useNumeralSystems;
