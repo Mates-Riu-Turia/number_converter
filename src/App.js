@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useScript from "./hooks/useScript";
 import useNumeralSystems from "./hooks/useNumeralSystems";
+import useTheme from "./hooks/useTheme";
 
 function Nav({ t, changeLanguage }) {
     const [state, setState] = useState(" " + t("chooseLang"));
@@ -22,24 +23,48 @@ function Nav({ t, changeLanguage }) {
     }
 
     return (
-        <nav className="navbar bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img src="favicon.ico" alt="Logo" width="30" height="24" className="d-inline-block align-text-top me-1" />
                     {t("title")}
                 </a>
-                <div className="dropdown me-4">
-                    <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageCa}>Valencià/Català</button></li>
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageEs}>Castellano</button></li>
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageEn}>English</button></li>
-                    </ul>
+
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
+                        </button>
+                        <ul className="dropdown-menu dropdown-menu-end">
+                            <li><button className="dropdown-item" type="button" onClick={changeLanguageCa}>Valencià/Català</button></li>
+                            <li><button className="dropdown-item" type="button" onClick={changeLanguageEs}>Castellano</button></li>
+                            <li><button className="dropdown-item" type="button" onClick={changeLanguageEn}>English</button></li>
+                        </ul>
+                    </div>
+                    <ThemeSelector t={t} />
                 </div>
             </div>
         </nav>
+    );
+}
+
+function ThemeSelector({ t }) {
+    const [getTheme, setTheme] = useTheme();
+
+    return (
+        <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className={getTheme()[0]}></i> <span id="currentTheme">{t(getTheme()[1])}</span>
+            </button>
+            <ul className="dropdown-menu dropdown-menu-end"> 
+                <li><button className="dropdown-item" type="button" onClick={() => setTheme("light")}><i className="bi bi-sun-fill">{t("themeSelector.light")}</i></button></li>
+                <li><button className="dropdown-item" type="button" onClick={() => setTheme("dark")}><i className="bi bi-moon-stars-fill">{t("themeSelector.dark")}</i></button></li>
+                <li><button className="dropdown-item" type="button" onClick={() => setTheme("auto")}><i className="bi bi-circle-half">{t("themeSelector.auto")}</i></button></li>
+            </ul>
+        </div>
     );
 }
 
@@ -61,7 +86,7 @@ function NumberForm({ t, setAppState }) {
 function NumeralSystemsModal({ t, numeralSystems, setNumeralSystems }) {
     return (
         <div className="modal fade" id="numeralSystemsModal" tabIndex="-1" aria-labelledby="numeralSystemsModalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered ">
+            <div className="modal-dialog modal-fullscreen-md-down modal-dialog-centered ">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="numeralSystemsModalLabel">{t("numeralSystemsModal.title")}</h1>
@@ -71,31 +96,31 @@ function NumeralSystemsModal({ t, numeralSystems, setNumeralSystems }) {
                         <h2>{t("numeralSystemsModal.ancient")}</h2>
                         <hr />
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="maya" checked={numeralSystems.maya} onChange={() => setNumeralSystems({...numeralSystems, maya: !numeralSystems.maya})}/>
+                            <input className="form-check-input" type="checkbox" id="maya" checked={numeralSystems.maya} onChange={() => setNumeralSystems({ ...numeralSystems, maya: !numeralSystems.maya })} />
                             <label className="form-check-label" htmlFor="maya">{t("numeralSystemsModal.maya")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="babylonian" checked={numeralSystems.babylonian} onChange={() => setNumeralSystems({...numeralSystems, babylonian: !numeralSystems.babylonian})}/>
+                            <input className="form-check-input" type="checkbox" id="babylonian" checked={numeralSystems.babylonian} onChange={() => setNumeralSystems({ ...numeralSystems, babylonian: !numeralSystems.babylonian })} />
                             <label className="form-check-label" htmlFor="babylonian">{t("numeralSystemsModal.babylonian")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="greek" checked={numeralSystems.greek} onChange={() => setNumeralSystems({...numeralSystems, greek: !numeralSystems.greek})}/>
+                            <input className="form-check-input" type="checkbox" id="greek" checked={numeralSystems.greek} onChange={() => setNumeralSystems({ ...numeralSystems, greek: !numeralSystems.greek })} />
                             <label className="form-check-label" htmlFor="greek">{t("numeralSystemsModal.greek")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="roman" checked={numeralSystems.roman} onChange={() => setNumeralSystems({...numeralSystems, roman: !numeralSystems.roman})}/>
+                            <input className="form-check-input" type="checkbox" id="roman" checked={numeralSystems.roman} onChange={() => setNumeralSystems({ ...numeralSystems, roman: !numeralSystems.roman })} />
                             <label className="form-check-label" htmlFor="roman">{t("numeralSystemsModal.roman")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="inca" checked={numeralSystems.inca} onChange={() => setNumeralSystems({...numeralSystems, inca: !numeralSystems.inca})}/>
+                            <input className="form-check-input" type="checkbox" id="inca" checked={numeralSystems.inca} onChange={() => setNumeralSystems({ ...numeralSystems, inca: !numeralSystems.inca })} />
                             <label className="form-check-label" htmlFor="inca">{t("numeralSystemsModal.inca")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="chinese" checked={numeralSystems.chinese} onChange={() => setNumeralSystems({...numeralSystems, chinese: !numeralSystems.chinese})}/>
+                            <input className="form-check-input" type="checkbox" id="chinese" checked={numeralSystems.chinese} onChange={() => setNumeralSystems({ ...numeralSystems, chinese: !numeralSystems.chinese })} />
                             <label className="form-check-label" htmlFor="chinese">{t("numeralSystemsModal.chinese")}</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="egyptian" checked={numeralSystems.egyptian} onChange={() => setNumeralSystems({...numeralSystems, egyptian: !numeralSystems.egyptian})}/>
+                            <input className="form-check-input" type="checkbox" id="egyptian" checked={numeralSystems.egyptian} onChange={() => setNumeralSystems({ ...numeralSystems, egyptian: !numeralSystems.egyptian })} />
                             <label className="form-check-label" htmlFor="egyptian">{t("numeralSystemsModal.egyptian")}</label>
                         </div>
                     </div>
@@ -123,7 +148,7 @@ function Footer({ t }) {
 export default function App() {
     const { t, i18n } = useTranslation();
 
-     const [numeralSystems, setNumeralSystems] = useNumeralSystems();
+    const [numeralSystems, setNumeralSystems] = useNumeralSystems();
 
     useScript("js/bootstrap_helper.js");
 
