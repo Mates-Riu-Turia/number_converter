@@ -18,5 +18,10 @@
         "chinese": "Chino",
         "egyptian": "Egipcio"
     },
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "themeSelector": {
+        "light": " Claro",
+        "dark": " Oscuro",
+        "auto": " Automático"
+    }
 }
