@@ -18,5 +18,10 @@
         "chinese": "Xinés",
         "egyptian": "Egipci"
     },
-    "close": "Tancar"
+    "close": "Tancar",
+    "themeSelector": {
+        "light": " Clar",
+        "dark": " Fosc",
+        "auto": " Automàtic"
+    }
 }
