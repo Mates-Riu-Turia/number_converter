@@ -5,23 +5,6 @@ import useNumeralSystems from "./hooks/useNumeralSystems";
 import useTheme from "./hooks/useTheme";
 
 function Nav({ t, changeLanguage }) {
-    const [state, setState] = useState(" " + t("chooseLang"));
-
-    function changeLanguageCa() {
-        changeLanguage("ca");
-        setState(" CA");
-    }
-
-    function changeLanguageEs() {
-        changeLanguage("es");
-        setState(" ES");
-    }
-
-    function changeLanguageEn() {
-        changeLanguage("en");
-        setState(" EN")
-    }
-
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -34,20 +17,33 @@ function Nav({ t, changeLanguage }) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div className="dropdown m-1">
-                        <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li><button className="dropdown-item" type="button" onClick={changeLanguageCa}>Valencià/Català</button></li>
-                            <li><button className="dropdown-item" type="button" onClick={changeLanguageEs}>Castellano</button></li>
-                            <li><button className="dropdown-item" type="button" onClick={changeLanguageEn}>English</button></li>
-                        </ul>
-                    </div>
+                    <LanguageSelector t={t} changeWebLang={changeLanguage} />
                     <ThemeSelector t={t} />
                 </div>
             </div>
         </nav>
+    );
+}
+
+function LanguageSelector({ t, changeWebLang }) {
+    const [state, setState] = useState(" " + t("chooseLang"));
+
+    const changeLanguage = (lang) => {
+        changeWebLang(lang);
+        setState(" " + lang.toUpperCase());
+    };
+
+    return (
+        <div className="dropdown m-1">
+            <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
+            </button>
+            <ul className="dropdown-menu">
+                <li><button className="dropdown-item" type="button" onClick={() => changeLanguage("ca")}>Valencià/Català</button></li>
+                <li><button className="dropdown-item" type="button" onClick={() => changeLanguage("es")}>Castellano</button></li>
+                <li><button className="dropdown-item" type="button" onClick={() => changeLanguage("en")}>English</button></li>
+            </ul>
+        </div>
     );
 }
 
@@ -59,7 +55,7 @@ function ThemeSelector({ t }) {
             <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className={getTheme()[0]}></i> <span id="currentTheme">{t(getTheme()[1])}</span>
             </button>
-            <ul className="dropdown-menu"> 
+            <ul className="dropdown-menu">
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("light")}><i className="bi bi-sun-fill">{t("themeSelector.light")}</i></button></li>
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("dark")}><i className="bi bi-moon-stars-fill">{t("themeSelector.dark")}</i></button></li>
                 <li><button className="dropdown-item" type="button" onClick={() => setTheme("auto")}><i className="bi bi-circle-half">{t("themeSelector.auto")}</i></button></li>
