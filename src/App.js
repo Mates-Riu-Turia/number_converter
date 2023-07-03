@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import useScript from "./hooks/useScript";
 import useNumeralSystems from "./hooks/useNumeralSystems";
 import useTheme from "./hooks/useTheme";
+import arabic2roman from "./numeral_systems/ancient/roman";
 
 function Nav({ t, changeLanguage }) {
     return (
@@ -154,6 +155,8 @@ export default function App() {
 
     // Set the Web Page Title
     document.title = t("title");
+
+    arabic2roman(5);
 
     return (
         <>
